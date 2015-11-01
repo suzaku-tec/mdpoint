@@ -22,3 +22,9 @@ Please Markdown files are always set.
 People who do not set do not know what to do presentation of.
 Separator, please set a string of a page break.
 If you do not specify a separator, which is the default value "---" will be set.
+
+After starting in the above command to access the browser.
+When's default, the server will start in the 8080 port.
+This mechanism Since you are using a SpringFW, you can change the port.
+When the boot is complete "http: // localhost: 8080" Please try to access.
+It should become a state which surely can be a presentation. Maybe...
