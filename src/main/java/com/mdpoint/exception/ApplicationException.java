@@ -1,5 +1,11 @@
 package com.mdpoint.exception;
 
+/**
+ * mdpoint application exception class
+ * 
+ * @author suzaku380
+ *
+ */
 public class ApplicationException extends Exception {
 
 	/**

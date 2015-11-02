@@ -1,14 +1,11 @@
 package com.mdpoint;
 
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.util.stream.Stream;
 
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContextException;
@@ -18,31 +15,56 @@ import com.mdpoint.data.PresentationViewData;
 @SpringBootApplication
 public class MdpointApplication {
 
-	private static final String DEFUALT_SEPARATOR = "---";
+	/**
+	 * default separator string
+	 */
+	private static final String DEFAULT_SEPARATOR = "---";
 	
+	/**
+	 * count of max parameter 
+	 */
 	private static final int MAX_ARG_SIZE = 2;
 	
+	/**
+	 * presentation data of this application
+	 */
 	private static PresentationViewData PRESEN_DATA;
 	
     /**
-     * アプリケーション開始メインメソッド
-     * @param args
-     * @throws IOException 
+     * application start main method
+     * @param args application parameter
+     * @throws IOException markdown file read error
      * 
      */
     public static void main(String[] args) throws IOException {
     	
+    	// application initialization
     	validate(args);
     	initPresentationData(args);
     	
+    	// server run
     	SpringApplication.run(MdpointApplication.class);
         
     }
 
+	/**
+	 * presentation data getter
+	 * @return
+	 */
 	public static PresentationViewData getPresenData() {
 		return PRESEN_DATA;
 	}
 
+	/**
+	 * application parameter validate method
+	 * this method check the following contents
+	 * ・the existence check parameters
+	 * ・the maximum check parameters
+	 * ・exists check of markdown file
+	 * 
+	 * @param args application parameter
+	 * @throws FileNotFoundException
+	 */
 	private static void validate(String[] args) throws FileNotFoundException {
 		
 		if(args.length == 0) {
@@ -58,12 +80,20 @@ public class MdpointApplication {
 		}
 	}
 
+	/**
+	 * presentation data initialization
+	 * 
+	 * @param args application parameter
+	 * @throws IOException
+	 */
 	private static void initPresentationData(String[] args) throws IOException {
 		
+		// create presentation data
 		PresentationViewData presentation = new PresentationViewData();
 		presentation.setMarkdown(readMarkdownFile(args[0]));
-		presentation.setSeparator(DEFUALT_SEPARATOR);
+		presentation.setSeparator(DEFAULT_SEPARATOR);
 
+		// The separator is set when I is designated
 		if(2 <= args.length) {
 			presentation.setSeparator(args[1]);
 		}
@@ -83,8 +113,10 @@ public class MdpointApplication {
 		
 		File markdown = new File(markdownPath);
 		
+		// returns a string reads the file
 		StringBuilder sb = new StringBuilder();
 		try(Stream<String> a = Files.lines(markdown.toPath())) {
+			// windows OS newline do not know! 
 			a.forEach(str -> sb.append(str).append("\n"));
 		}
 

@@ -9,6 +9,12 @@ import com.mdpoint.MdpointApplication;
 @Controller
 public class PresentationController {
 
+	/**
+	 * presentation data set & create presentation page
+	 * 
+	 * @param model
+	 * @return HTML file name
+	 */
 	@RequestMapping("/")
 	public String presentation(Model model) {
 		model.addAttribute("presenData", MdpointApplication.getPresenData());

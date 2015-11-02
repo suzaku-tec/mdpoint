@@ -1,9 +1,21 @@
 package com.mdpoint.data;
 
+/**
+ * presentaion data object
+ * 
+ * @author suzaku380
+ *
+ */
 public class PresentationViewData {
 
+	/**
+	 * markdown file content
+	 */
 	private String markdown;
 	
+	/**
+	 * markdown file page separator
+	 */
 	private String separator;
 
 	public String getMarkdown() {
